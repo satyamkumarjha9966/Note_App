@@ -25,3 +25,6 @@ The app places a strong emphasis on accessibility and usability. Semantic HTML t
 
 ## 8. Code Quality and Organization:
 The codebase for the Note App is well-organized, making it easily maintainable and extensible. The JavaScript code follows best practices and is modularized to promote reusability and readability. Additionally, CSS classes are named sensibly and grouped logically, making it simple to style and modify the app.
+
+![Screenshot (387)](https://github.com/satyamkumarjha9966/Note_App/assets/123254088/ee49562e-4353-4441-90ae-69056ad792ad)
+
