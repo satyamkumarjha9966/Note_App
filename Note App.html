@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/ae2012805a.js" crossorigin="anonymous"></script>
+    <title>Note App</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        #main{
+            width: 100%;
+            min-height: 100vh;
+            background-color: aqua;
+            display: flex;
+            flex-wrap: wrap;
+            /* justify-content: center; */
+            padding-bottom: 80px;
+        }
+        .note{
+            height: 400px;
+            width: 400px;
+            background-color: white;
+            margin: 15px;
+            margin-top: 55px;
+            margin-bottom: 50px;
+        }
+        .toolbar{
+            width: 100%;
+            padding: 5px;
+            background-color: black;
+            color: white;
+            display: flex;
+            justify-content: end;
+            gap: 7px;
+        }
+        .toolbar i {
+            padding: 15px;
+            font-size: 25px;
+            cursor: pointer;
+        }
+        .note textarea {
+            width: 100%;
+            height: 100%;
+            border: none;
+            resize: none;
+            padding: 10px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .note textarea:focus{
+            outline: none;
+        }
+        #addNoteBtn{
+            position: fixed;
+            right: 20px;
+            top: 10px;
+            background-color: black;
+            color: white;
+            font-weight: bold;
+            padding: 10px;
+            border: none;
+            border-radius: 8px;
+            outline: none;
+            font-size: 15px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <button id="addNoteBtn">
+        <i class="fa-solid fa-plus"></i> Add Note 
+    </button>
+    <div id="main">
+        <div class="note">
+            <div class="toolbar">
+                <i class="fa-solid fa-trash"></i>
+                <i class="fa-solid fa-floppy-disk"></i>
+            </div>
+            <textarea></textarea>
+        </div> 
+    </div>
+
+    <script>
+        let btn = document.getElementById('addNoteBtn');
+        let main = document.getElementById('main')
+
+        const saveNotes = () => {
+            const note = document.querySelectorAll('.note textarea');
+            const data = [];
+            note.forEach((Notes) => {
+                data.push(Notes.value);
+            })
+            localStorage.setItem('note', JSON.stringify(data));
+        }
+
+        btn.addEventListener('click', function () {
+            newNote()
+        } );
+
+        let newNote = () => {
+            let notes = document.createElement('div');
+            notes.classList.add('note');
+            notes.innerHTML = `
+            <div class="toolbar">
+                <i class="trash fa-solid fa-trash"></i>
+                <i class="save fa-solid fa-floppy-disk"></i>
+            </div>
+            <textarea></textarea>`;
+
+            notes.querySelector('.trash').addEventListener(
+                'click',
+                function () {
+                    notes.remove();
+                    saveNotes();
+                }
+            );
+
+            notes.querySelector('.save').addEventListener(
+                'click',
+                function () {
+                    saveNotes();
+                }
+            )
+
+            main.appendChild(notes);
+            saveNotes();
+        }
+    </script>
+    
+</body>
+</html>
